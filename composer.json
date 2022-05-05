@@ -1,0 +1,35 @@
+{
+    "name": "kuraykaraaslan/supreme",
+    "autoload": {
+        "psr-4": {
+            "Kuraykaraaslan\\Supreme\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kuray Karaaslan",
+            "email": "kuraykaraaslan@mail.com"
+        }
+    ],
+    "require": {
+        "google/cloud-translate": "*",
+        
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kuraykaraaslan\\Supreme\\": "Src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kuraykaraaslan\\Supreme\\SupremeServiceProvider"
+            ],
+            "aliases": {
+                "Supreme": "Kuraykaraaslan\\Supreme\\Facades\\Supreme",
+                "SupremeSEO": "Kuraykaraaslan\\Supreme\\Facades\\SupremeSEO"
+            }
+        }
+    }
+
+}
