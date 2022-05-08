@@ -4,9 +4,6 @@
 @endsection
 
 @section('content')
-
-    <!-- a card for post -->
-
     <div class="card mt-2">
         <div class="card-header">
             <h3 class="card-title">@if (isset($post)){{ $post->title }}@else{{ __('supreme.title_not_found') }}@endif</h3>

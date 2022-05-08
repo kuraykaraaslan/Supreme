@@ -16,6 +16,12 @@ class SupremeServiceProvider extends ServiceProvider
     {
 
         $this->loadTranslationsFrom(__DIR__ . '/Languages', 'supreme');
+        $this->app['router']->aliasMiddleware('supreme-language-picker', \Kuraykaraaslan\Supreme\Middleware\LanguagePicker::class);
+
+        $this->publishes([
+            __DIR__.'/Public' => public_path('supreme'),
+        ], 'public');
+
 
     }
 
@@ -37,6 +43,8 @@ class SupremeServiceProvider extends ServiceProvider
         $this->app->bind('supreme-lang', function () {
             return new SupremeLang();
         });
+
+
 
         $this->loadRoutesFrom(__DIR__ . '/Routes/Web.php', 'supreme');
 

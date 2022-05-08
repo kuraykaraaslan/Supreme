@@ -1,49 +1,71 @@
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
-        </svg>
-        <span class="fs-4">{{ Supreme::settings('app.title') }}</span>
-    </a>
-
-    <ul class="nav nav-pills">
-        @foreach(Supreme::settings('navigation.menus')['main']['items'] as $item)
-        @if(!isset($item['children']) || $item['children'] == [])
-        <li class="nav-item">
-            <a class="nav-link link-dark @if (Route::currentRouteName() == $item['url']) active @endif" href="{{ Route::has($item['url']) ? route($item['url']) : '#' }}">
-                <i class="{{ $item['icon'] }}"></i>
-                {{ $item['name'] }}
-            </a>
-        </li>
-        @else
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle @if (Route::currentRouteName() == $item['url']) active @endif" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="{{ $item['icon'] }}"></i>
-                {{ $item['name'] }}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                @foreach($item['children'] as $child)
-                <a class="dropdown-item @if (Route::currentRouteName() == $child['url']) active @endif" href="{{ Route::has($child['url']) ? route($child['url']) : '#' }}">
-                    <i class="{{ $child['icon'] }}"></i>
-                    {{ $child['name'] }}
-                </a>
-                @endforeach
-            </div>
-        </li>
-        @endif
-        @endforeach
-        <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-earth-europe"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @foreach(Supreme::settings('app.available_locales') as $key => $locale)
-                    <a class="dropdown-item" href="{{ SupremeLang::alternate($key) }}">
-                        {{ $locale }}
-                        @endforeach
-                    </a>
+<header id="header" class="border-bottom-0" data-sticky-shrink="false">
+    <div id="header-wrap">
+        <div class="container">
+            <div class="header-row">
+                <div id="logo">
+                    <a href="{{ Route::has('front.homepage') ? route('front.homepage') : '#' }}" class="standard-logo" data-sticky-logo="{{asset('supreme/images/coop/logo-sticky.png')}}"><img src="{{asset('supreme/images/coop/logo.png')}}" alt="{{ Supreme::settings('app.site_name')}}"></a>
+                    <a href="{{ Route::has('front.homepage') ? route('front.homepage') : '#' }}" class="retina-logo" data-sticky-logo="{{asset('supreme/images/coop/logo-sticky.png')}}"><img src="{{asset('supreme/images/coop/logo.png')}}" alt="{{ Supreme::settings('app.site_name')}}"></a>
                 </div>
-        </li>
 
-    </ul>
+                <div class="header-misc">
+                    <a class="top-phone" href="{{__('contact.default_phone_link')}}"><i class="fa-solid fa-phone"></i></a>
+                </div>
+
+                <div id="primary-menu-trigger">
+                    <svg class="svg-trigger" viewBox="0 0 100 100">
+                        <path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path>
+                        <path d="m 30,50 h 40"></path>
+                        <path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path>
+                    </svg>
+                </div>
+
+                <nav class="primary-menu">
+
+                    <ul class="menu-container">
+
+                        @if (isset(Supreme::settings('navigation.menus')['main']['items']))
+                        @foreach (Supreme::settings('navigation.menus')['main']['items'] as $item)
+                        @if ($item['active'])
+                        @if (in_array(SupremeLang::getLocale(), $item['available_locales']) || $item['available_locales'] == [] )
+                        @if(!isset($item['children']) || $item['children'] == [])
+                        <li class="menu-item">
+                            <a class="menu-link @if (Route::current()->getName() == $item['url']) active @endif" href="{{ Route::has($item['url']) ? route($item['url']) : '#' }}">
+                                <div>{{ SupremeLang::trans_choice($item['name']) }}</div>
+                            </a>
+                        </li>
+                        @else
+                        <li class="menu-item has-children">
+                            <a class="menu-link @if (Route::current()->getName() == $item['url']) active @endif" href="{{ Route::has($item['url']) ? route($item['url']) : '#' }}">
+                                <div>{{ SupremeLang::trans_choice($item['name']) }}</div>
+                            </a>
+                            <ul class="sub-menu">
+                                @foreach ($item['children'] as $child)
+                                @if ($item['active'])
+                                @if (in_array(SupremeLang::getLocale(), $item['available_locales']) ||  $item['available_locales'] == []  )
+                                <li class="menu-item"><a class="menu-link @if (Route::current()->getName() == $child['url']) active @endif" href="{{ Route::has($child['url']) ? route($child['url']) : '#' }}">{{ SupremeLang::trans_choice($child['name']) }}</a></li>
+                                <div>{{ SupremeLang::trans_choice($child['name']) }}</div>
+                                </a>
+                                @endif
+                                @endif
+                        </li>
+                        @endforeach
+                    </ul>
+                    </li>
+                    @endif
+                    @endif
+                    @endif
+                    @endforeach
+                    @endif
+
+
+
+
+                    </ul>
+
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    <div class="header-wrap-clone"></div>
 </header>

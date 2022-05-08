@@ -12,18 +12,22 @@ class Page extends Model
 
     protected $fillable =[
         'name',
+
         'slug',
+
         'content',
-        'order',
         'parent_id',
+
         'template',
+
+        'title',
+        'description',
+        'keywords',
+
+        'available_locales',
         'status',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+
+
     ];
 
     public function parent()

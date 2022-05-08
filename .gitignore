@@ -1,1 +1,7 @@
 /vendor/
+/Public/css/
+/Public/js/
+/Public/images/
+/Views/front/page/
+/Views/front/layouts/
+/Views/front/partials/

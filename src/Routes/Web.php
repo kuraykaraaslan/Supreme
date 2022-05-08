@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Kuraykaraaslan\Supreme\Controllers\FrontController;
 use Kuraykaraaslan\Supreme\Controllers\SettingsController;
 use Kuraykaraaslan\Supreme\Supreme;
+use Kuraykaraaslan\Supreme\SupremeLang;
 
 Route::get('/reset', [SettingsController::class, 'reset']);
 Route::get('/post_demo', function() {
@@ -25,6 +26,27 @@ Route::group(['prefix' => Supreme::settings('settings.path')], function () {
 });
 
 
-Route::get('/', [FrontController::class, 'homepage'])->name('front.homepage');
+Route::group(['prefix' => SupremeLang::getTranslatedLanguages(), 'middleware' => 'supreme-language-picker'], function () {
 
-Route::any('{catchall}', [FrontController::class, 'e404'])->where('catchall', '.*');
+    Route::get('/', [FrontController::class, 'homepage'])->name('front.homepage');
+    
+    Route::get( SupremeLang::trans_route('front.blog'), [FrontController::class, 'post_index'])->name('front.blog');
+    //Route::get( SupremeLang::trans_route('front.contact'), [FrontController::class, 'contact'])->name('front.contact');
+
+    //Route::get('/{category_slug}/{post_slug}', [FrontController::class, 'post_show'])->name('front.post.show');
+
+    //Route::get('/{category_slug}', [FrontController::class, 'post_show'])->name('front.post.show');
+
+    //Route::get('/post/{post}', [FrontController::class, 'post_show'])->name('front.post.show');
+
+    Route::get('/lang', function () {
+        return SupremeLang::trans_route('front.blog', 0, [], 'de');
+    });
+
+
+});
+
+
+//Route::get('/', [FrontController::class, 'homepage'])->name('front.homepage');
+
+//Route::any('{catchall}', [FrontController::class, 'e404'])->where('catchall', '.*');

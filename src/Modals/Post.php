@@ -12,100 +12,32 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'name',
         'slug',
         'content',
+        'category_id',
+        'template',
+        'status',
+        'title',
         'description',
         'keywords',
-        'category_id',
-        'status',
-        'image',
-        'user_id',
-
-        'translations',
+        'available_locales',
     ];
 
-    public function category()
+    public function parent()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function tags()
+    public function comments()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->hasMany(Comment::class, 'post_id');
     }
 
-    public function url()
-    {
-        return route('supreme.post.show', $this->id);
-    }
 
-    public function getVariable($variable)
-    {
-        return 'deneme';
-
-        if(in_array($variable, Supreme::settings('app.translatable')))
-        {
-
-            if (!is_json($this->{$variable})) {
-
-                $decode = [];
-
-                $temp = $this->{$variable};
-
-                $lang = Supreme::detectLanguage($temp);
-
-                $decode[$lang] = $temp;
-
-                $this->{$variable} = json_encode($decode);
-
-                $this->save();
-
-                Supreme::log('String ' .  $variable . ' of post ' . $this->id . ' changed to json');
-            }
-
-            if(is_json($this->{$variable}))
-            {
-                $decode = json_decode($this->{$variable}, true);
-
-                if(array_key_exists($variable, $decode))
-                {
-                    return $decode[$variable];
-
-                } else { 
-
-                    $translated = Supreme::translateString($variable, app()->getLocale());
-
-                    if($translated)
-                    {
-                        $decode[$variable] = $translated;
-
-                        $this->{$variable} = json_encode($decode);
-
-                        $this->save();
-
-                        return $translated;
-
-                    } else {
-
-                        Supreme::log('Translate ' .  $variable . ' of post ' . $this->id . ' not found');
-
-                        return __('supreme::messages.no_translation');
-
-                    }
-
-                }
-
-            } 
-
-        } else {
-            if (is_json($this->{$variable})) {
-                $decode = json_decode($this->{$variable}, true);
-        }
-
-
-
-        }
-    }
 
 }
+
+
+
+

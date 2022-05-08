@@ -1,31 +1,57 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="{{App::getLocale()}}">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{asset('supreme/css/bootstrap.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{asset('supreme/css/style.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{asset('supreme/css/swiper.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{asset('supreme/css/dark.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{asset('supreme/css/animate.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{asset('supreme/css/magnific-popup.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{asset('supreme/css/yapi.css')}}" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
 
-    <!-- Bootstrap CSS v5.0.2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     {!! SupremeSEO::generate() !!}
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    @yield('head')
 </head>
 
-<body>
-    <div class="container">
+<body class="stretched">
+	<div id="wrapper" class="boxed">
+        @include('supreme::front.partial.topbar')
         @include('supreme::front.partial.navbar')
+        <section id="content">
+			<div class="content-wrap pt-3 pb-6">
             @yield('content')
+            </div>
+		</section>
         @include('supreme::front.partial.footer')
     </div>
+
+    @if (Session::get('cookie') != 'accepted')
+	<div class="alert text-center cookiealert" role="alert" style="background-color: #99855F;">
+	     {!!__('supreme::messages.cookie_alert') !!} <a href="{{ Route::has('front.terms') ? route('front.terms') : '#' }}"></a>
+
+		
+
+		<button type="button" id="cookie-alert" class="btn btn-primary btm-yapi-kahverengi btn-sm acceptcookies">
+		{{__('supreme::messages.cookie_accept')}}
+		</button>
+	</div>
+    @endif
+
+    <div id="gotoTop" class="icon-angle-up"></div>
+	<script src="{{asset('supreme/js/jquery.js')}}"></script>
+	<script src="{{asset('supreme/js/plugins.min.js')}}"></script>
+	<script src="{{asset('supreme/js/functions.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+
     @yield('scripts')
 
 
+
     <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 
 </html>

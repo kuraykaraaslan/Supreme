@@ -15,9 +15,14 @@ class Supreme
     static public function reset()
     {
         $default_settings = [
-            'app.title' => 'Supreme',
+            'app.title' => 'Inferno Yapı',
             'app.url' => 'http://localhost',
-            'app.locale' => 'en',
+            'app.description' => 'Supreme is a simple and powerful framework for Laravel.',
+            'app.keywords' => 'supreme, laravel, framework',
+            'app.favicon' => '',
+            'app.logo' => asset('supreme/images/coop/logo.png'),
+            'app.logo-sticky' => asset('supreme/images/coop/logo-sticky.png'),
+            'app.locale' => 'tr',
             'app.translatable' => ['title', 'description', 'keywords'],
             'app.available_locales' => [
                 'en' => 'English',
@@ -27,18 +32,18 @@ class Supreme
                 'es' => 'Español',
                 'it' => 'Italiano',
             ],
-            'app.currency' => 'USD',
+            'app.currency' => 'try',
             'app.available_currencies' => [
-                'USD' => 'US Dollar',
-                'EUR' => 'Euro',
-                'GBP' => 'British Pound',
-                'TRY' => 'Turkish Lira',
+                'usd' => 'US Dollar',
+                'eur' => 'Euro',
+                'gbp' => 'British Pound',
+                'try' => 'Turkish Lira',
             ],
             'app.default_currency_rates' => [
-                'EUR' => 1,
-                'USD' => 1.06,
-                'GBP' => 0.84,
-                'TRY' => 15.67
+                'eur' => 1,
+                'usd' => 1.06,
+                'gbp' => 0.84,
+                'try' => 15.67
             ],
             'app.timezone' => 'Europe/Istanbul',
             'app.date_format' => 'd/m/Y',
@@ -51,34 +56,138 @@ class Supreme
             'blog.title' => 'Blog',
             'blog.description' => '',
             'blog.keywords' => '',
-            'blog.available_locales' => ['en', 'tr'],
+            'blog.available_locales' => ['tr'],
             'blog.posts_per_page' => 10,
             'blog.comments_per_page' => 10,
             'blog.comments_enabled' => true,
             'page.seo_tags' => ['title', 'description', 'keywords'],
+            'navigation.footer_widgets' => 
+            [
+                [
+                    'name' => 'navigation.services',
+                    'type' => 'route',
+                    'url' => '#',
+                    'icon' => 'fa fa-cogs',
+                    'order' => 1,
+                    'available_locales' => [],
+                    'active' => true,
+                    'items' => [
+                    [
+                        'name' => 'navigation.services.structural',
+                        'type' => 'route',
+                        'url' => 'front.services.structural',
+                        'icon' => 'fa fa-building',
+                        'role' => 'guest',
+                        'available_locales' => [],
+                        'active' => true,
+                        'children' => [],
+                    ],
+                    [
+                        'name' => 'navigation.services.architectural',
+                        'type' => 'route',
+                        'url' => 'front.services.architectural',
+                        'icon' => 'fa fa-building',
+                        'role' => 'guest',
+                        'available_locales' => [],
+                        'active' => true,
+                        'children' => [],
+                    ],
+                    [
+                        'name' => 'navigation.services.interior',
+                        'type' => 'route',
+                        'url' => 'front.services.interior',
+                        'icon' => 'fa fa-home',
+                        'role' => 'guest',
+                        'available_locales' => [],
+                        'active' => true,
+                        'children' => [],
+                    ],
+                ],
+                ],
+                [   
+                    'name' => 'navigation.about',
+                    'type' => 'route',
+                    'url' => '#',
+                    'icon' => 'fa fa-info-circle',
+                    'order' => 2,
+                    'available_locales' => [],
+                    'items' => [
+                    [
+                        'name' => 'navigation.about',
+                        'type' => 'route',
+                        'url' => 'front.about',
+                        'icon' => 'fa fa-info-circle',
+                        'role' => 'guest',
+                        'available_locales' => [],
+                        'active' => true,
+                        'children' => [],
+                    ],
+                    [
+                        'name' => 'navigation.privacy',
+                        'type' => 'route',
+                        'url' => 'front.privacy',
+                        'icon' => 'fa fa-lock',
+                        'role' => 'guest',
+                        'available_locales' => [],
+                        'active' => true,
+                        'children' => [],
+                    ],
+                    [
+                        'name' => 'navigation.careers',
+                        'type' => 'route',
+                        'url' => 'front.careers',
+                        'icon' => 'fa fa-briefcase',
+                        'role' => 'guest',
+                        'available_locales' => [],
+                        'active' => true,
+                        'children' => [],
+                    ],
+                    [
+                        'name' => 'navigation.blog',
+                        'type' => 'route',
+                        'url' => 'front.blog',
+                        'icon' => 'fa fa-pencil',
+                        'role' => 'guest',
+                        'available_locales' => ['tr'],
+                        'active' => true,
+                        'children' => [],
+                    ],
+
+                ],
+                ],
+            ],
             'navigation.menus' => [
                 'main' => [
                     'name' => 'Main',
                     'items' => [
                         [
-                            'name' => 'Home',
-                            'url' => 'front.home',
+                            'name' => 'navigation.homepage',
+                            'type' => 'route',
+                            'url' => 'front.homepage',
                             'icon' => 'fa fa-home',
-                            'permission' => '',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
                             'children' => [],
                         ],
                         [
-                            'name' => 'Blog',
+                            'name' => 'navigation.blog',
+                            'type' => 'route',
                             'url' => 'front.blog',
                             'icon' => 'fa fa-pencil',
-                            'permission' => '',
+                            'role' => 'guest',
+                            'available_locales' => ['tr'],
+                            'active' => true,
                             'children' => [],
                         ],
                         [
-                            'name' => 'Contact',
+                            'name' => 'navigation.contact',
+                            'type' => 'route',
                             'url' => 'front.contact',
                             'icon' => 'fa fa-envelope',
-                            'permission' => '',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
                             'children' => [],
                         ],
                     ],
@@ -87,24 +196,33 @@ class Supreme
                     'name' => 'Footer',
                     'items' => [
                         [
-                            'name' => 'About',
-                            'url' => '/about',
+                            'name' => 'navigation.about',
+                            'type' => 'route',
+                            'url' => 'front.about',
                             'icon' => 'fa fa-info-circle',
-                            'permission' => '',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
                             'children' => [],
                         ],
                         [
-                            'name' => 'Privacy',
-                            'url' => '/privacy',
+                            'name' => 'navigation.privacy',
+                            'type' => 'route',
+                            'url' => 'front.privacy',
                             'icon' => 'fa fa-lock',
-                            'permission' => '',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
                             'children' => [],
                         ],
                         [
-                            'name' => 'Terms',
-                            'url' => '/terms',
+                            'name' => 'navigation.terms',
+                            'type' => 'route',
+                            'url' => 'front.terms',
                             'icon' => 'fa fa-file-text-o',
-                            'permission' => '',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
                             'children' => [],
                         ],
                     ],
@@ -113,32 +231,93 @@ class Supreme
                     'name' => 'Social',
                     'items' => [
                         [
-                            'name' => 'Facebook',
-                            'url' => 'https://www.facebook.com/',
-                            'icon' => 'fa fa-facebook',
-                            'permission' => '',
-                            'children' => [],
+                            'name' => 'navigation.courses',
+                            'type' => 'route',
+                            'url' => 'front.courses',
+                            'icon' => 'fa fa-book',
+                            'role' => 'guest',
+                            'available_locales' => ['tr'],
+                            'active' => true,
+                            'color' => '#3b5998',
+                            'class' => 'si-udemy',
+                            
                         ],
                         [
-                            'name' => 'Twitter',
-                            'url' => 'https://www.twitter.com/',
-                            'icon' => 'fa fa-twitter',
-                            'permission' => '',
-                            'children' => [],
+                            'name' => 'navigation.social.facebook',
+                            'type' => 'link',
+                            'url' => 'https://www.facebook.com/infernoyapi',
+                            'icon' => 'fa-brands fa-facebook',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
+                            'color' => '#3b5998',
+                            'class' => 'si-facebook',
                         ],
                         [
-                            'name' => 'Instagram',
-                            'url' => 'https://www.instagram.com/',
-                            'icon' => 'fa fa-instagram',
-                            'permission' => '',
-                            'children' => [],
+                            'name' => 'navigation.social.twitter',
+                            'type' => 'link',
+                            'url' => 'https://www.twitter.com/infernoyapi',
+                            'icon' => 'fa-brands fa-twitter',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
+                            'color' => '#00aced',
+                            'class' => 'si-twitter',
                         ],
                         [
-                            'name' => 'Youtube',
-                            'url' => 'https://www.youtube.com/',
-                            'icon' => 'fa fa-youtube',
-                            'permission' => '',
-                            'children' => [],
+                            'name' => 'navigation.social.youtube',
+                            'type' => 'link',
+                            'url' => 'https://www.youtube.com/infernoyapi',
+                            'icon' => 'fa-brands fa-youtube',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
+                            'color' => '#ff0000',
+                            'class' => 'si-youtube',
+                        ],
+                        [
+                            'name' => 'navigation.social.linkedin',
+                            'type' => 'link',
+                            'url' => 'https://www.linkedin.com/company/infernoyapi',
+                            'icon' => 'fa-brands fa-linkedin',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
+                            'color' => '#007bb6',
+                            'class' => 'si-linkedin',
+                        ],
+                        [
+                            'name' => 'navigation.social.instagram',
+                            'type' => 'link',
+                            'url' => 'https://www.instagram.com/infernoyapi',
+                            'icon' => 'fa-brands fa-instagram',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
+                            'color' => '#517fa4',
+                            'class' => 'si-instagram',
+                        ],
+                        [
+                            'name' => 'navigation.social.whatsapp',
+                            'type' => 'link',
+                            'url' => 'https://wa.me/905516815365',
+                            'icon' => 'fa-brands fa-whatsapp',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
+                            'color' => '#25d366',
+                            'class' => 'si-whatsapp',
+                        ],
+                        [
+                            'name' => 'navigation.social.email',
+                            'type' => 'link',
+                            'url' => 'mailto:info@infernoyapi.com',
+                            'icon' => 'fa fa-envelope',
+                            'role' => 'guest',
+                            'available_locales' => [],
+                            'active' => true,
+                            'color' => '#000000',
+                            'class' => 'si-email1',
                         ],
                     ],
                 ],
@@ -188,35 +367,35 @@ class Supreme
                             'name' => 'Blog',
                             'url' => 'settings.blog',
                             'icon' => 'fa fa-pencil',
-                            'permission' => '',
+                            'role' => 'guest',
                             'aligment' => 'left',
                             'children' => [
                                 [
                                     'name' => 'Posts',
                                     'url' => 'settings.posts',
                                     'icon' => 'fa fa-pencil',
-                                    'permission' => '',
+                                    'role' => 'guest',
                                     'children' => [],
                                 ],
                                 [
                                     'name' => 'Categories',
                                     'url' => 'settings.categories',
                                     'icon' => 'fa fa-pencil',
-                                    'permission' => '',
+                                    'role' => 'guest',
                                     'children' => [],
                                 ],
                                 [
                                     'name' => 'Tags',
                                     'url' => 'settings.tags',
                                     'icon' => 'fa fa-pencil',
-                                    'permission' => '',
+                                    'role' => 'guest',
                                     'children' => [],
                                 ],
                                 [
                                     'name' => 'Comments',
                                     'url' => 'settings.comments',
                                     'icon' => 'fa fa-pencil',
-                                    'permission' => '',
+                                    'role' => 'guest',
                                     'children' => [],
                                 ],
                             ],
@@ -225,7 +404,7 @@ class Supreme
                             'name' => 'Settings',
                             'url' => 'settings',
                             'icon' => 'fa fa-cog',
-                            'permission' => '',
+                            'role' => 'guest',
                             'aligment' => 'right',
                             'children' => [],
                         ],
@@ -243,15 +422,20 @@ class Supreme
     }
 
     /* A function to get settings from the settings.json file. */
-    static public function settings($key = null)
+    static public function settings($key = null, $vaule = null)
     {
         $file = __DIR__ . '/Storage/app/settings.json';
         $settings = json_decode(file_get_contents($file), true);
 
-        if (array_key_exists($key, $settings)) {
-            return $settings[$key];
+        if ($vaule) {
+            $settings[$key] = $vaule;
+            file_put_contents($file, json_encode($settings));
         } else {
-            return null;
+            if (array_key_exists($key, $settings)) {
+                return $settings[$key];
+            } else {
+                return null;
+            }
         }
     }
 
@@ -313,16 +497,15 @@ class Supreme
         return $lang['languageCode'];
     }
 
-    static public function abort($message = null, $code = null)
+    static public function getMenu($name = null)
     {
-        if (is_null($message)) {
-            $message = 'Something went wrong';
-        }
+        $file = __DIR__ . '/Storage/app/settings.json';
+        $settings = json_decode(file_get_contents($file), true);
 
-        if (is_null($code)) {
-            $code = 404;
+        if (is_null($name)) {
+            return [];
         }
-
-        return view('supreme:errors.error', ['message' => $message, 'code' => $code]);
     }
+
+
 }

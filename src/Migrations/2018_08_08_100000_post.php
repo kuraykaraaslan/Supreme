@@ -20,25 +20,27 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->jsonb('title');
-            $table->string('slug');
-            $table->jsonb('content');
+            $table->jsonb('slug');
+            $table->jsonb('content')->nullable();
             $table->jsonb('description')->nullable();
             $table->jsonb('keywords')->nullable();
-            $table->bigInteger('category_id')->unsigned();
             $table->string('status');
-            $table->string('user_id');
             $table->string('image')->nullable();
-            $table->jsonb('translations')->nullable();
-
+            $table->integer('category_id')->nullable();
+            $table->string('template')->nullable();
+            $table->jsonb('available_locales')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**
      * Reverse the migrations.
-     *
+     * 
+     * 
      * @return void
-     */
+     * @throws \Exception
+        */
     public function down()
     {
         Schema::dropIfExists('posts');
