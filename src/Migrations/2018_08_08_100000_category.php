@@ -24,8 +24,8 @@ return new class extends Migration
             $table->jsonb('content')->nullable();
             $table->jsonb('description')->nullable();
             $table->jsonb('keywords')->nullable();
-            $table->string('status');
             $table->string('image')->nullable();
+            $table->string('status');
             $table->integer('parent_id')->nullable();
             $table->string('template')->nullable();
             $table->jsonb('available_locales')->nullable();

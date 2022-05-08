@@ -23,6 +23,7 @@ class Page extends Model
         'title',
         'description',
         'keywords',
+        'image',
 
         'available_locales',
         'status',
